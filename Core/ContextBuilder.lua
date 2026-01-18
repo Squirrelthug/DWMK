@@ -129,7 +129,7 @@ end
 
 local function BuildCapabilities()
     return {
-        canDismount = not InCombatLockedown(),
+        canDismount = not InCombatLockdown(),
         canBlockMount = true,
         canNotify = true,
     }
