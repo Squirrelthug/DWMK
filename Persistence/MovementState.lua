@@ -108,3 +108,70 @@ function MovementState:SetRestriction(
 
     return true
 end
+
+function MovementState:ClearRestriction(campaignID)
+    if not campaidID then
+        return false
+    end
+
+    local record = EnsureMovementRecord(campaignID)
+    if not record then
+        return false
+    end
+
+    record.restriction = MovementState.RESTRICTION.NONE
+    record.reason = MovementState.REASON.SYSTEM_UNKNOWN
+    record.appliedAt = time()
+    record.expiresAt = nil
+    record.meta = {}
+
+    return true
+end
+
+function MovementState:IsActive(campaignID)
+    local record = self:Get(campaignID)
+    if not record then
+        return false
+    end
+
+    if record.restriction == MovementState.RESTRICTION.NONE then
+        return false
+    end
+
+    if record.expiresAt and time() >= record.expiresAt then
+        return false
+    end
+
+    return true
+end
+
+function MovementState:GetEffectiveRestriction(campaignID)
+    local record = self:Get(campaignID)
+    if not record then
+        return MovementState.RESTRICTION.NONE
+    end
+
+    if record.restriction == MovementState.RESTRICTION.NONE then
+        return MovementState.RESTRICTION.NONE
+    end
+
+    if record.expiresAt and time() >= record.expiresAt then
+        return MovementState.RESTRICTION.NONE
+    end
+
+    return record.restriction
+end
+
+function MovementState:PruneIfExpired(campaignID)
+    local record = self:Get(campaignID)
+    if not record then
+        return false
+    end
+
+    if record.expiresAt and time() >= record.expiresAt then
+        return self:ClearRestriction(campaignID)
+    end
+
+    return false
+end
+
