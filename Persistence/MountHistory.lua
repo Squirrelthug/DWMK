@@ -9,7 +9,7 @@ MountHistory.EVENT = {
     MOUNT_WITH_PLAYER = "MOUNT_WITH_PLAYER",
     MOUNT_BLOCKED = "MOUNT_BLOCKED",
     MOUNT_DISMOUNTED = "MOUNT_DISMOUNTED",
-    MOUNT_RELOACTED = "MOUNT_RELOACTED",
+    MOUNT_RELOACTED = "MOUNT_RELOCATED",
     SYSTEM_NOTE = "SYSTEM_NOTE",
 }
 
@@ -108,7 +108,7 @@ function MountHistory:Add(campaignID, eventType, payload)
     end
 
     local history = EnsureHistoryTable(campaign)
-    if no history then
+    if not history then
         return false
     end
 
@@ -117,7 +117,7 @@ function MountHistory:Add(campaignID, eventType, payload)
     local entry = {
         seq = history.seq,
         at = time(),
-        event = SafeString(eventType)
+        event = SafeString(eventType),
         mountID = payload and payload.mountID or nil,
         reason = payload and SafeString(payload.reason) or nil,
         verdict = payload and SafeString(payload.verdict) or nil,
