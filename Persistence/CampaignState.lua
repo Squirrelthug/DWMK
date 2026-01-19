@@ -73,21 +73,7 @@ function CampaignState:SetNarrativeFlag(campaignID, flagKey, value)
 end
 
 function CampaignState:SetNarrativeFlag(campaignID, flagKey, value)
-    local campaign = self()
-    if not campaigns then
-        return nil
-    end
-
-    local campaign = campaigns[campaignID]
-    if campaign then
-        campaign.lastAccessedAt = time()
-    end
-
-    return campaign
-end
-
-function CampaignState:SetNarrativeFlag(campaignID, flagKey, value)
-    local campaign = self()
+    local campaign = self(campaignID)
     if not campaigns then
         return nil
     end

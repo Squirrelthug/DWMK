@@ -97,7 +97,7 @@ function MountState:SetAnchoredAt(
     mapID,
     x,
     y,
-    dismountReason,
+    dismountReason
 )
     if not campaignID or not mountID or not mapID or not x or not y then
         return false

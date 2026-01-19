@@ -14,6 +14,12 @@ local IsMounted = IsMounted
 local IsIndoors = IsIndoors
 local IsFlying = IsFlying
 local IsSwimming = IsSwimming
+local UnitOnTaxi = UnitOnTaxi
+local UnitIsDeadOrGhost = UnitIsDeadOrGhost
+local GetInstanceInfo = GetInstanceInfo
+local IsResting = IsResting
+local InCombatLockdown = InCombatLockdown
+local table = table
 
 -- snapshotting for race conditions
 local snapshotCounter = 0
@@ -64,8 +70,8 @@ end
 
 -- player section
 local function BuildPlayer()
-    local className, classFile = UnitClass("player"),
-    local raceName, raceFile = Unitrace("player"),
+    local className, classFile = UnitClass("player")
+    local raceName, raceFile = UnitRace("player")
     local faction = UnitFactionGroup("player")
 
     return {
@@ -157,7 +163,7 @@ function ContextBuilder.Build(trigger)
     context.campaign = BuildCampaign()
     context.player = BuildPlayer()
     context.environment = BuildEnvironment()
-    context.mount = BuildMount()
+    context.mount = BuildMounts()
     context.movement = BuildMovement()
     context.history = BuildHistory()
     context.capabilities = BuildCapabilities()

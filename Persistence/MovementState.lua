@@ -110,7 +110,7 @@ function MovementState:SetRestriction(
 end
 
 function MovementState:ClearRestriction(campaignID)
-    if not campaidID then
+    if not campaignID then
         return false
     end
 

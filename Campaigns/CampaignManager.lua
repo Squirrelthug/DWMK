@@ -83,7 +83,7 @@ end
 
 -- safe accessor for campaign settings
 function CampaignManager:GetActiveCampaignSettings()
-    local campaign = self.GetActiveCampaign()
+    local campaign = self:GetActiveCampaign()
     if not campaign then
         return nil
     end
@@ -92,7 +92,7 @@ end
 
 -- get mount store for active campaign
 function CampaignManager:GetActiveCampaignMounts()
-    local campaign = self.GetActiveCampaign()
+    local campaign = self:GetActiveCampaign()
     if not campaign then
         return nil
     end

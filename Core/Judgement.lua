@@ -94,7 +94,7 @@ function Judgement.Evaluate(context)
 
     return MakeVerdict("ALLOW", {
         reason = "NO_RULE_TRIGGERED",
-        severity = context.campaigns.severity,
+        severity = context.campaign.severity,
     })
 end
 
