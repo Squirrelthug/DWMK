@@ -4,7 +4,7 @@
     Version: 0.1.0
 ]]
 
-local ADDON_NAME = "Dismounted"
+local ADDON_NAME = "dismounted"
 local ADDON_VERSION = "0.1.0"
 
 -- Create main frame
